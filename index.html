@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Demo - Buy item with login </title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h4>In this demo, it helps you to understand how to request user to login and enforce address to buy an item</h4>
+
+<pre id="loggedIn">Please login</pre>
+
+<button id="loginBtn" onclick="login()">Login</button>
+
+<button id="logoutBtn" onclick="logout()">Logout</button>
+
+<br><br>
+
+<div id="item" style="display: none;">
+
+  <fieldset style="width:40%">
+    <legend>Item #1</legend>
+    <img src="https://png.pngtree.com/element_our/png/20180930/artificial--brain--intelligence-png_116457.jpg" width=100px height=100px></img>
+    <br><br>
+    <label>Buy some love</label><br><br>
+    <input onclick="buy()" type="submit" value="Buy">
+  </fieldset>
+  <br><br>
+
+  <pre id="txidLabel"></pre>
+      <!--<caption>brain icons PNG Designed By syedhassan from <a href="https://pngtree.com"> Pngtree.com</a></caption>-->
+</div>
+<!-- partial -->
+  <script src='https://unpkg.com/@vechain/connex@2'></script><script  src="./script.js"></script>
+
+</body>
+</html>
