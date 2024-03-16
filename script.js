@@ -2,11 +2,13 @@ const vendor = new Connex.Vendor("test");
 var addressLabel = document.getElementById("loggedIn");
 var address = "";
 
-//var itemDiv = document.getElementById("item");
-//var supportDiv = document.getElementById("support");
 const params = new URLSearchParams(window.location.search);
 const useraccountValue = params.get('user'); 
 const numValue = parseInt(params.get('num'),10);
+
+window.onload = function() {
+  login();
+};
 
 function login() {
   vendor
@@ -21,27 +23,26 @@ function login() {
     .request()
     .then((r) => {Swal.fire({
       title: 'Login Success',
-      text: 'Logged in successfully!\nAddress: ' + r.annex.signer,
+      text: 'Logged in successfully! Address: ' + r.annex.signer,
       icon: 'success',
       showCloseButton: false,
       showCancelButton: true,
       focusConfirm: true,
       confirmButtonText: "Confirm Transaction",
-      cancelButtonText: "Cancel"
+      cancelButtonText: "Cancel",
+      timer: 2000,
+      timerProgressBar: true
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (!result.isCancelled) {
         buy();
       }
     });
       address = r.annex.signer;
       addressLabel.innerText = "Logged In: " + address;
-      //itemDiv.style.display = "inline-block";
-      //supportDiv.style.display = "inline-block";
     })
-    //.catch((e) => console.log("error:" + e.message));
     .catch((e) => Swal.fire({
       title: 'Error!',
-      text: 'Login failed.\n\nError: ' + e.message,
+      text: 'Login failed. Error: ' + e.message,
       icon: 'error',
       timer: 10000,
       timerProgressBar: true,
@@ -50,21 +51,10 @@ function login() {
 
 function logout() {
   addressLabel.innerText = "Please login";
-  //itemDiv.style.display = "none";
-  //supportDiv.style.display = "none";
   address = "";
 }
 
 function buy() {
-  //var txIdLabel = document.getElementById("txidLabel");
-  //var cups = 1;
-  //const cupsRadio = document.getElementsByName("cups");
-  
-  //for (var i = 0; i < cupsRadio.length; i++) {
-  //  if (cupsRadio[i].checked) {
-  //    cups = cupsRadio[i].value;
-  //  }
-  //}
   try {
   vendor
     .sign("tx", [
@@ -87,7 +77,7 @@ function buy() {
 
     .then((r) => Swal.fire({
       title: 'Completed!',
-      text: 'Transaction completed. Thx for the money :)\nTxId: ' + r.txid,
+      text: 'Transaction completed. TxId: ' + r.txid,
       icon: 'success',
       timer: 10000,
       timerProgressBar: true,
@@ -95,7 +85,7 @@ function buy() {
     //.catch((e) => console.log("error:" + e.message));
     .catch((e) => Swal.fire({
       title: 'Error!',
-      text: 'Transaction failed.\nError: ' + e.message,
+      text: 'Transaction failed. Error: ' + e.message,
       icon: 'error',
       timer: 10000,
       timerProgressBar: true,
@@ -104,7 +94,7 @@ function buy() {
   catch {
     Swal.fire({
       title: 'Error!',
-      text: 'Transaction initiation failed.\nAccount details or numerical value incorrect.',
+      text: 'Transaction initiation failed. Account details or numerical value incorrect.',
       icon: 'error',
       timer: 10000,
       timerProgressBar: true,
