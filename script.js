@@ -2,8 +2,8 @@ const vendor = new Connex.Vendor("test");
 var addressLabel = document.getElementById("loggedIn");
 var address = "";
 
-var itemDiv = document.getElementById("item");
-var supportDiv = document.getElementById("support");
+//var itemDiv = document.getElementById("item");
+//var supportDiv = document.getElementById("support");
 const params = new URLSearchParams(window.location.search);
 const useraccountValue = params.get('user'); 
 const numValue = parseInt(params.get('num'),10);
@@ -23,41 +23,48 @@ function login() {
       title: 'Login Success',
       text: 'Logged in successfully!\nAddress: ' + r.annex.signer,
       icon: 'success',
-      timer: 1500,
-      timerProgressBar: true,
-    })
+      showCloseButton: false,
+      showCancelButton: true,
+      focusConfirm: true,
+      confirmButtonText: "Confirm Transaction",
+      cancelButtonText: "Cancel"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        buy();
+      }
+    });
       address = r.annex.signer;
       addressLabel.innerText = "Logged In: " + address;
-      itemDiv.style.display = "inline-block";
-      supportDiv.style.display = "inline-block";
+      //itemDiv.style.display = "inline-block";
+      //supportDiv.style.display = "inline-block";
     })
     //.catch((e) => console.log("error:" + e.message));
     .catch((e) => Swal.fire({
       title: 'Error!',
       text: 'Login failed.\n\nError: ' + e.message,
       icon: 'error',
-      timer: 1500,
+      timer: 10000,
       timerProgressBar: true,
     }));
 }
 
 function logout() {
   addressLabel.innerText = "Please login";
-  itemDiv.style.display = "none";
-  supportDiv.style.display = "none";
+  //itemDiv.style.display = "none";
+  //supportDiv.style.display = "none";
   address = "";
 }
 
 function buy() {
-  var txIdLabel = document.getElementById("txidLabel");
-  var cups = 1;
-  const cupsRadio = document.getElementsByName("cups");
+  //var txIdLabel = document.getElementById("txidLabel");
+  //var cups = 1;
+  //const cupsRadio = document.getElementsByName("cups");
   
-  for (var i = 0; i < cupsRadio.length; i++) {
-    if (cupsRadio[i].checked) {
-      cups = cupsRadio[i].value;
-    }
-  }
+  //for (var i = 0; i < cupsRadio.length; i++) {
+  //  if (cupsRadio[i].checked) {
+  //    cups = cupsRadio[i].value;
+  //  }
+  //}
   try {
   vendor
     .sign("tx", [
@@ -82,7 +89,7 @@ function buy() {
       title: 'Completed!',
       text: 'Transaction completed. Thx for the money :)\nTxId: ' + r.txid,
       icon: 'success',
-      timer: 2000,
+      timer: 10000,
       timerProgressBar: true,
     }))
     //.catch((e) => console.log("error:" + e.message));
@@ -90,7 +97,7 @@ function buy() {
       title: 'Error!',
       text: 'Transaction failed.\nError: ' + e.message,
       icon: 'error',
-      timer: 2000,
+      timer: 10000,
       timerProgressBar: true,
     }));
   }
@@ -99,7 +106,7 @@ function buy() {
       title: 'Error!',
       text: 'Transaction initiation failed.\nAccount details or numerical value incorrect.',
       icon: 'error',
-      timer: 2000,
+      timer: 10000,
       timerProgressBar: true,
     })
   };
