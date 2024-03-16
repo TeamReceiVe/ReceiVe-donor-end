@@ -3,6 +3,10 @@ var addressLabel = document.getElementById("loggedIn");
 var address = "";
 
 var itemDiv = document.getElementById("item");
+var supportDiv = document.getElementById("support");
+const params = new URLSearchParams(window.location.search);
+const useraccountValue = params.get('user'); 
+const numValue = parseInt(params.get('num'),10);
 
 function login() {
   vendor
@@ -10,36 +14,53 @@ function login() {
       purpose: "identification",
       payload: {
         type: "text",
-        content: "Please sign the certificate to continue purchase"
+        content: "Please sign the certificate to continue purchase\n" + useraccountValue
       }
     })
     //.accepted(() => alert("accepted"))
     .request()
     .then((r) => {Swal.fire({
       title: 'Login Success',
-      text: 'Logged in successfully!\nAddress: ' + address,
+      text: 'Logged in successfully!\nAddress: ' + r.annex.signer,
       icon: 'success',
     })
       address = r.annex.signer;
       addressLabel.innerText = "Logged In: " + address;
       itemDiv.style.display = "inline-block";
+      supportDiv.style.display = "inline-block";
     })
-    .catch((e) => console.log("error:" + e.message));
+    //.catch((e) => console.log("error:" + e.message));
+    .catch((e) => Swal.fire({
+      title: 'Error!',
+      text: 'Login failed.\nError: ' + e.message,
+      icon: 'error',
+    }));
 }
 
 function logout() {
   addressLabel.innerText = "Please login";
   itemDiv.style.display = "none";
+  supportDiv.style.display = "none";
   address = "";
 }
 
 function buy() {
   var txIdLabel = document.getElementById("txidLabel");
+  var cups = 1;
+  const cupsRadio = document.getElementsByName("cups");
+  
+  for (var i = 0; i < cupsRadio.length; i++) {
+    if (cupsRadio[i].checked) {
+      cups = cupsRadio[i].value;
+    }
+  }
   vendor
     .sign("tx", [
       {
-        to: "0x6e1Ab9A6556a328baD854c88d1b85651A6C3DC27",
-        value: 100 * 1e18, //unit in wei
+        //to: "0x6e1Ab9A6556a328baD854c88d1b85651A6C3DC27",
+        to: r.annex.signer,
+        //value: 100 * 1e18 * cups, //unit in wei
+        value: 100 * 1e18 * numValue,
         data: "0x"
       }
     ])
