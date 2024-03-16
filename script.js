@@ -23,6 +23,8 @@ function login() {
       title: 'Login Success',
       text: 'Logged in successfully!\nAddress: ' + r.annex.signer,
       icon: 'success',
+      timer: 1500,
+      timerProgressBar: true,
     })
       address = r.annex.signer;
       addressLabel.innerText = "Logged In: " + address;
@@ -32,8 +34,10 @@ function login() {
     //.catch((e) => console.log("error:" + e.message));
     .catch((e) => Swal.fire({
       title: 'Error!',
-      text: 'Login failed.\nError: ' + e.message,
+      text: 'Login failed.\n\nError: ' + e.message,
       icon: 'error',
+      timer: 1500,
+      timerProgressBar: true,
     }));
 }
 
@@ -54,6 +58,7 @@ function buy() {
       cups = cupsRadio[i].value;
     }
   }
+  try {
   vendor
     .sign("tx", [
       {
@@ -77,11 +82,25 @@ function buy() {
       title: 'Completed!',
       text: 'Transaction completed. Thx for the money :)\nTxId: ' + r.txid,
       icon: 'success',
+      timer: 2000,
+      timerProgressBar: true,
     }))
     //.catch((e) => console.log("error:" + e.message));
     .catch((e) => Swal.fire({
       title: 'Error!',
-      text: 'Transaction failed. Are you poor?\nError: ' + e.message,
+      text: 'Transaction failed.\nError: ' + e.message,
       icon: 'error',
+      timer: 2000,
+      timerProgressBar: true,
     }));
+  }
+  catch {
+    Swal.fire({
+      title: 'Error!',
+      text: 'Transaction initiation failed.\nAccount details or numerical value incorrect.',
+      icon: 'error',
+      timer: 2000,
+      timerProgressBar: true,
+    })
+  };
 }
