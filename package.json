@@ -1,10 +1,8 @@
 {
   "dependencies": {
     "@vechain/connex": "^2.1.0",
-    "react": "^18.2.0",
-    "solc": "^0.8.25"
-  },
-  "devDependencies": {
+    "@vechain/dapp-kit": "^1.0.12",
+    "connex": "^0.0.1",
     "typescript": "^5.4.2"
   }
 }
