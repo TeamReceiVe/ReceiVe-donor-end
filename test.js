@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = require("react");
 var connex_1 = require("@vechain/connex");
-var signerContext_1 = require("../state/signerContext");
+var signerContext_1 = require("./state/signerContext");
 var useWalletConnex = function () {
     var _a = (0, react_1.useState)(null), connex = _a[0], setConnex = _a[1];
     var _b = (0, react_1.useState)(null), vendor = _b[0], setVendor = _b[1];

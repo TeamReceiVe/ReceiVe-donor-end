@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Connex from '@vechain/connex';
-import { useSigner } from "../state/signerContext";
+import { useSigner } from "./state/signerContext";
 
 const useWalletConnex = () => {
   const [connex, setConnex] = useState<Connex | null>(null);
