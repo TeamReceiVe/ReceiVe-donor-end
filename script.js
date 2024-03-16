@@ -44,7 +44,7 @@ function login() {
       title: 'Error!',
       text: 'Login failed. Error: ' + e.message,
       icon: 'error',
-      timer: 10000,
+      timer: 15000,
       timerProgressBar: true,
     }));
 }
@@ -79,7 +79,7 @@ function buy() {
       title: 'Completed!',
       text: 'Transaction completed. TxId: ' + r.txid,
       icon: 'success',
-      timer: 10000,
+      timer: 15000,
       timerProgressBar: true,
     }))
     //.catch((e) => console.log("error:" + e.message));
@@ -87,7 +87,7 @@ function buy() {
       title: 'Error!',
       text: 'Transaction failed. Error: ' + e.message,
       icon: 'error',
-      timer: 10000,
+      timer: 15000,
       timerProgressBar: true,
     }));
   }
@@ -96,7 +96,7 @@ function buy() {
       title: 'Error!',
       text: 'Transaction initiation failed. Account details or numerical value incorrect.',
       icon: 'error',
-      timer: 10000,
+      timer: 15000,
       timerProgressBar: true,
     })
   };
