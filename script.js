@@ -13,9 +13,13 @@ function login() {
         content: "Please sign the certificate to continue purchase"
       }
     })
-    // .accepted(() => alert("accepted"))
+    //.accepted(() => alert("accepted"))
     .request()
-    .then((r) => {
+    .then((r) => {Swal.fire({
+      title: 'Login Success',
+      text: 'Logged in successfully!\nAddress: ' + address,
+      icon: 'success',
+    })
       address = r.annex.signer;
       addressLabel.innerText = "Logged In: " + address;
       itemDiv.style.display = "inline-block";
@@ -44,8 +48,19 @@ function buy() {
     //a link that can redirect user to visit
     .link("https://explore-testnet.vechain.org/transactions/{txid}")
     .comment("buy some love")
-    // .accepted(() => alert("accepted"))
+    //.accepted(() => alert("accepted"))
     .request()
-    .then((r) => (txIdLabel.innerText = "TxId: " + r.txid))
-    .catch((e) => console.log("error:" + e.message));
+    //.then((r) => (txIdLabel.innerText = "TxId: " + r.txid))
+
+    .then((r) => Swal.fire({
+      title: 'Completed!',
+      text: 'Transaction completed. Thx for the money :)\nTxId: ' + r.txid,
+      icon: 'success',
+    }))
+    //.catch((e) => console.log("error:" + e.message));
+    .catch((e) => Swal.fire({
+      title: 'Error!',
+      text: 'Transaction failed. Are you poor?\nError: ' + e.message,
+      icon: 'error',
+    }));
 }
