@@ -60,7 +60,7 @@ function buy() {
         //to: "0x6e1Ab9A6556a328baD854c88d1b85651A6C3DC27",
         to: useraccountValue,
         //value: 100 * 1e18 * cups, //unit in wei
-        value: 100 * 1e18 * numValue,
+        value: 1e18 * numValue,
         data: "0x"
       }
     ])
