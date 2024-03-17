@@ -1,21 +1,3 @@
-# Vechain
+# ReceiVe Donor End
 
-## Target
-
-Minimum viable product
-
-validating receipts
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+Donor Transfer End
