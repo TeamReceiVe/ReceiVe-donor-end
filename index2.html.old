@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Demo - token list + transfer</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<h4>In this demo, it helps you to understand how to get the token list and transfer token</h4>
+
+<label for="tokens">Recipient: </label>
+<input id="to" placeholder="enter recipient address" value="0x70aE85A2fF6030366F512DbcD60Be3828139b498"></input>
+<br><br>
+<label for="amount">Amount: </label>
+<input id="amount" placeholder="enter transfer amount" value=1></input>
+<select name="tokensList" id="tokensList">
+</select>
+
+
+<br><br>
+<button onclick="transferToken()">Transfer</button>
+
+<pre id="result"></pre>
+<!-- partial -->
+  <script src='https://unpkg.com/@vechain/connex@2'></script><script  src="./script2.js"></script>
+
+</body>
+</html>
